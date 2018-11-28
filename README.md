@@ -148,55 +148,6 @@ You should be able to it at http://\<your-app-name>.azurewebsites.net
 
 Now, you know how to set up and simple server. Any more complex server with one entry file is just as easy!
 
-## How do you deploy React app then?
-If you were using `create-react-app` to create your React application, 
-you would find that you run `npm start` and a server is some how set up for you 
-and you can visit the page at `localhost:3000`
-
-If you think about frontend for a second, 
-we know that all webpages boils down to 3 static things, HTML, CSS and JavaScript.
-
-React offers you great features like hot reloading by running the local server. 
-However, to get a production-ready and optimized React we page. 
-You can compile it to just HTML, CSS and JavaScript.
-
-Let's do a quick demo.
-
-```
-create-react-app demo
-cd demo
-npm start 
-```
-
-This should start the react server at localhost:3000.
-We know that React gives this default page to us. 
-Now, Let's try to deploy this defualt page onto Azure.
-
-First, we create the static build.
-
-```
-npm run build
-```
-After the program finishes, you should see a new folder called `build`
-pop up in under your React app directory.
-The `build` directory contains the static HTML, CSS, JavaScript needed for the frontend.
-
-Now we copy this `build` folder to some other directory.
-We will create a new Github repository, push this build folder up to our Github repository.
-
-Create a new Azure App Service.
-
-
-* Go to our Azure portal, click on __Create a resource__ on the left menu. 
-* Search for __Web App__.
-* Enter App Name, choose carefully since your URL will be "\<your-app-name>.azurewebsites.net"
-* Subscription should be __Azure for Students__.
-* Resource Group should be __Create new__.
-* OS should be __Linux__
-* Publish should be __Code__
-* Runtime Stack should be __Node.js 10.10__, or any other Node version that works.
-
-
 
 
 ## Resources
