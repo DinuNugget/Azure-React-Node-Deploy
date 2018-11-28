@@ -149,6 +149,65 @@ You should be able to it at http://\<your-app-name>.azurewebsites.net
 Now, you know how to set up and simple server. Any more complex server with one entry file is just as easy!
 
 
+## How to set up a React frontend?
+If you were using `create-react-app` to create your React application, 
+you would find that you run `npm start` and a server is some how set up for you 
+and you can visit the page at `localhost:3000`.
+
+If you think about frontend for a second, 
+we know that all webpages boils down to 3 static things, HTML, CSS and JavaScript.
+
+React offers you great features like hot reloading by running the local server. 
+However, to get a production-ready and optimized React we page. 
+You can compile it to just HTML, CSS and JavaScript.
+Let's do a quick demo.
+
+```
+create-react-app demo
+cd demo
+npm start 
+```
+
+This should start the react server at localhost:3000.
+We know that React gives a default page to us. 
+
+Now, Let's try to deploy this defualt page onto Azure.
+First, we create the static build. 
+```
+npm run build
+```
+After the program finishes, you should see a new folder called `build`
+pop up in under your React app directory.
+The `build` directory contains the static HTML, CSS, JavaScript needed for the frontend.
+
+Now, under the `demo` directory, we create a tiny node server that serves our page. 
+
+```js
+const express = require('express');
+const app = express();
+const path = require('path');
+
+app.use(express.static(path.join(__dirname, '/build')));
+// Handle React routing, return all requests to React app
+app.get('*', function(req, res) {
+  res.sendFile(path.join(__dirname, '/build', 'index.html'));
+});
+
+const PORT = process.env.PORT || 1337;
+
+app.listen(PORT, () => console.log(PORT));
+```
+
+We basically tell express that we have some static file under the directory `build`.
+For all endpoints, we serve `index.html` in the `build` directory
+which is the entry point to our static react page.
+
+This is a valid node server. Just a tiny bit more complex than the previous one.
+We create a new Github repository to put our frontend server in.
+
+We follow the same step as above to create a Web App. Deploy in the same way.
+
+
 
 ## Resources
 
